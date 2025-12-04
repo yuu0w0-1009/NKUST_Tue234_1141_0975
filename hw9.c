@@ -14,6 +14,7 @@ int result = 0;
 // 區分奇偶數, char
 int distinguish(char a[100]) {
     int z = 0;
+
     len = strlen(a);
     if (len % 2 == 0)z = 1;
 
