@@ -5,18 +5,20 @@
 
 int main(void){
     int input = 0, chose = 0;
-    int change = 0, get = 0;
+    int change = 0;
     int drink[6] = {0,15,20,25,30,50};
 
     while (1){
         scanf("%d",&input);
         if(input<0)break;
         scanf("%d",&chose);
-
+        if(input<drink[chose])printf("get:NA,change:%d\n",input);
+        else{
+            change = input - drink[chose];
+            printf("get:%d,change:%d\n",chose, change);
+        }
     }
     
-
-
     system("pause");
     return 0;
 }
