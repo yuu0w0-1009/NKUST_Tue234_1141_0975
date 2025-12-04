@@ -32,15 +32,6 @@ int distinguish(char a[100]) {
     even_n[y] = '\0';
     y = 0;
 
-    // for (x = 0; x < len; x++) {
-    //     printf("%c ",odd_n[x]);
-    // }
-    // printf("\n");
-    // for (x = 0; x < len; x++) {
-    //     printf("%c ",even_n[x]);
-    // }
-    // printf("\n");
-
     return 0;
 }
 
@@ -63,10 +54,6 @@ int calculate(char a[50], char b[50]) {
     }
 
     result = odd_num - even_num;
-    // printf("%d\n", odd_num);
-    // printf("%d\n", even_num);
-    // printf("%d\n", result);
-
     printf("%d-%d=%d\n", odd_num, even_num, result);
 
     return result;
