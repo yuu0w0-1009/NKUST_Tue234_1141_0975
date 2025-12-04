@@ -31,7 +31,6 @@ int main() {
 		else if(mode == 2)printf("%d ", lcm(num1, num2));
 		printf("\n");
     }
-
 	system("pause");
     return 0;
 }
