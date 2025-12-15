@@ -23,11 +23,14 @@ void hanoi(int n, char A, char B, char C) {
 }
 
 int main() {
-    int n;
-    printf("請輸入盤數：");
-    scanf("%d", &n);
-
-    hanoi(n, 'A', 'B', 'C');
+    int num;
+    while (1){
+        scanf("%d", &num);
+        if(num==-1)break;
+        hanoi(num, 'A', 'B', 'C');
+    }
+    
+    
     system("pause");
     return 0;
 }
