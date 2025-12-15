@@ -11,20 +11,14 @@
 //N to C
 //1~N to C
 
-int tower[3][10] = {
-    {0},    //A
-    {0},    //B
-    {0},    //C
-};
-
-void hanoi(int n, char from, char to, char temp) {
+void hanoi(int n, char A, char B, char C) {
     if (n == 1) {
-        printf("Move sheet from %c to %c\n", from, to);
+        printf("move %d from %c to %c\n", n, A, C);
     }
     else {
-        hanoi(n - 1, from, temp, to);
-        hanoi(1, from, to, temp);
-        hanoi(n - 1, temp, to, from);
+        hanoi(n - 1, A, C, B);
+        printf("move %d from %c to %c\n", n, A, C);
+        hanoi(n - 1, B, A, C);
     }
 }
 
@@ -32,11 +26,6 @@ int main() {
     int n;
     printf("請輸入盤數：");
     scanf("%d", &n);
-
-    for (int i = 0; i < n; i++) {
-        tower[0][i] = i + 1;
-        printf("%d\n", tower[0][i]);
-    }
 
     hanoi(n, 'A', 'B', 'C');
     system("pause");
