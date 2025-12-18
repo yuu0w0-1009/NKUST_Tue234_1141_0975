@@ -1,61 +1,39 @@
 #define _CRT_SECURE_NO_WARNINGS
-
 #include <stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
+
+void print_binary_d(int n) {
+    if (n > 1) {
+        print_binary_d(n / 2);
+    }
+    printf("%d", n % 2);
+}
+
+void print_binary_i(float n) {
+    if (n == 0) return;
+    while (n > 0) {
+        n *= 2;
+        int bit = n;
+        printf("%d", bit);
+        n -= bit;
+    }
+}
 
 int main(void) {
-    int x = 0;
-    int mode = 0; // 1 = 0, 2 = 1 , 3 = 1.1
-    int input_i = 0;
-    float input = 0, input_d = 0;
-    int result[50] = { 0 };
+    float input;
     scanf("%f", &input);
 
-    input_i = (int)input;
-    input_d = input - input_i;
+    int input_d = input;
+    input -= input_d;
 
-    if (input == 0)mode = 1;
-    else if (input_d == 0)mode = 2;
-    else mode = 3;
+    if (input_d == 0) printf("0");
+    else print_binary_d(input_d);
 
-    switch (mode){
-    case 1:
-        printf("0");
-        break;
-    case 2:
-        while (1) {
-            if (input_i == 0)break;
-            result[x++] = input_i % 2;
-            input_i /= 2;
-        }
-        break;
-    case 3:
-        while (1) {
-            if (input_d == 0)break;
-            input_d *= 2;
-            if (input_d >= 1.0) {
-                result[x++] = 1;
-                input_d -= 1.0;
-            }
-            else 
-                result[x++] = 0;
-        }
-        result[x++] = 999;
-        while (1) {
-            if (input < 1)result[x++] = 0;
-            if (input_i == 0)break;
-            result[x++] = input_i % 2;
-            input_i /= 2;
-        }
-        break;
-    default:
-        break;
+    if (input > 0) {
+        printf(".");
+        print_binary_i(input);
     }
 
-    for (int i = x - 1; i >= 0; i--) {
-        if (result[i] == 999)printf(".");
-        else printf("%1d", result[i]);
-    }
     printf("\n");
     system("pause");
     return 0;
