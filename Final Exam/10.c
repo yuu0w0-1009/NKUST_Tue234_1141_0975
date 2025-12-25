@@ -3,13 +3,13 @@
 #include <stdio.h>
 #include<stdlib.h>
 
-void hanoi(int n, char A, char B, char C) {
+void hanoi(int n, char from, char temp, char to) {
     if (n == 1)
-        printf("move %d from %c to %c\n", n, A, C);
+        printf("move %d from %c to %c\n", n, from, to);
     else {
-        hanoi(n - 1, A, C, B);
-        printf("move %d from %c to %c\n", n, A, C);
-        hanoi(n - 1, B, A, C);
+        hanoi(n - 1, from, to, temp);
+        printf("move %d from %c to %c\n", n, from, to);
+        hanoi(n - 1, temp, from, to);
     }
 }
 

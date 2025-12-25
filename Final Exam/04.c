@@ -17,7 +17,8 @@ int main(void) {
         if (a == -1)break;
         scanf("%d %d %d %d", &b, &c, &d, &want);
         total = a * 50 + b * 10 + c * 5 + d * 1;
-        if (total < drink[want])printf("get:NA,change:%d %d %d %d\n", a, b, c, d);
+        if (total < drink[want])
+            printf("get:NA,change:%d %d %d %d\n", a, b, c, d);
         else {
             get = want;
             change = total - drink[want];
