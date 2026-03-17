@@ -1,25 +1,19 @@
-#define _CRT_SECURE_NO_WARNINGS
+#ifdef _MSC_VER
+    #define _CRT_SECURE_NO_WARNINGS
+#endif
 
 #include <stdio.h>
-#include<stdlib.h>
 
-void hanoi(int n, char from, char temp, char to) {
-    if (n == 1)
-        printf("move %d from %c to %c\n", n, from, to);
-    else {
-        hanoi(n - 1, from, to, temp);
-        printf("move %d from %c to %c\n", n, from, to);
-        hanoi(n - 1, temp, from, to);
-    }
+int partition(int n, int m) {
+    if (n == 0 || m == 1) return 1;
+    if (n < 0 || m <= 0) return 0;
+    if (m > n) return partition(n, n);
+    return partition(n - m, m) + partition(n, m - 1);
 }
 
 int main() {
-    int num;
-    while (1){
-        scanf("%d", &num);
-        if(num==-1)break;
-        hanoi(num, 'A', 'B', 'C');
+    int n;
+    while ( (scanf("%d", &n) != EOF) && n != -1) {
+        printf("%d\n", partition(n, n));
     }
-    system("pause");
-    return 0;
 }
