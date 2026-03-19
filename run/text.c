@@ -1,19 +1,27 @@
-#ifdef _MSC_VER
-    #define _CRT_SECURE_NO_WARNINGS
-#endif
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
+#include <stdlib.h>
 
-int partition(int n, int m) {
-    if (n == 0 || m == 1) return 1;
-    if (n < 0 || m <= 0) return 0;
-    if (m > n) return partition(n, n);
-    return partition(n - m, m) + partition(n, m - 1);
-}
+int compare(const void *a, const void *b) {
+    return (*(int*)a - *(int*)b); }
 
-int main() {
-    int n;
-    while ( (scanf("%d", &n) != EOF) && n != -1) {
-        printf("%d\n", partition(n, n));
+int main(){
+    int N;
+    int data[100]={0};
+
+    while ( (scanf("%d",&N) != EOF) && N != -1) {
+        for (int i = 0; i < N; i++){
+            scanf("%d",&data[i]);
+        }
+
+        qsort(data, N, sizeof(int), compare);
+
+        for (int i = 0; i < N; i++){
+            printf("%d ",data[i]);
+        }
+        puts("");
     }
+    system("pause");
+    return 0;
 }
