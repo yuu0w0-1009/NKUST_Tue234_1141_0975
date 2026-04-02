@@ -84,7 +84,7 @@ int main() {
                points[i].x, points[i].y, points[i].rel_angle);
     }
 
-    // 釋放動態配置的記憶體 (養成好習慣)
+    // 釋放動態配置的記憶體
     free(points);
 
     return 0;
