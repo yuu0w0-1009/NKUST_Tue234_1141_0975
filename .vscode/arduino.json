@@ -8,6 +8,7 @@
   "optimize_for_debug": false,
   "configurationRequired": false,
   "compile_profile": "",
+  "files.encoding": "cp950",
   "monitorPortSettings": {
     "port": "",
     "baudRate": 115200,

@@ -1,0 +1,32 @@
+Use member function
+Creation successful
+Creation successful
+Creation successful
+ID duplicated
+Creation successful
+2 Mallory 023456789 kaohsiung85F
+No such ID
+2 Victor 023456789 kaohsiung85F
+2 Victor 023456789 AddressVictor
+2 Victor 091111111 AddressVictor
+1 Alice 0912345678 Taipei101
+No such ID
+3 Eve 071234567 kaohsiung
+No such ID
+1 Alice 0912345678 Taipei101
+2 Victor 091111111 AddressVictor
+3 Eve 071234567 kaohsiung
+10 Bob 0987654321 NKUST415
+No such ID
+Deletion successful
+1 Alice 0912345678 Taipei101
+3 Eve 071234567 kaohsiung
+10 Bob 0987654321 NKUST415
+Exit member function
+No such command
+Use member function
+1 Alice 0912345678 Taipei101
+3 Eve 071234567 kaohsiung
+10 Bob 0987654321 NKUST415
+Exit member function
+Goodbye

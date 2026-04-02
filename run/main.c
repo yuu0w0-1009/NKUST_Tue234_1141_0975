@@ -1,172 +1,88 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <math.h>
 
-#define member_size 100
-#define name_size 10
-#define phone_size 10
-#define address_size 50
+typedef struct {
+    double x;
+    double y;
+    double rel_angle; // 儲存與起始方向的「相對偽角度」
+} Point;
 
-typedef struct{
-    char name[name_size+1];
-    char phone[phone_size+1];
-    char address[address_size+1];
-} Member;
+// 偽角度演算法 (不變)
+// 回傳範圍 [-2, 2]，逆時針遞增
+double pseudoangle(double dx, double dy) {
+    if (dx == 0.0 && dy == 0.0) {
+        return 0.0; 
+    }
+    
+    double p = dx / (fabs(dx) + fabs(dy));
+    
+    if (dy < 0.0) {
+        return p - 1.0;
+    } else {
+        return 1.0 - p;
+    }
+}
 
-Member member[member_size];
-int user_check[member_size] = {0}; // 0 = none; 1 = used
-int current_count = 0;
+// 降冪排序函數 (不變)
+int compare_clockwise(const void *a, const void *b) {
+    Point *p1 = (Point *)a;
+    Point *p2 = (Point *)b;
+    
+    if (p1->rel_angle > p2->rel_angle) return -1;
+    if (p1->rel_angle < p2->rel_angle) return 1;
+    return 0;
+}
 
-void main_block();
-void print_id(int id);
-void add_member();
-void edit_member();
-void del_member();
-void require_one_member();
-void require_all_member();
+int main() {
+    Point center_point = {50, 50}; 
+    Point center_vector = {0,1};
+    
+    // 計算起始方向的基準偽角度
+    double start_p_angle = pseudoangle(center_vector.x, center_vector.y);
+    
+    int num_points = 4;
+    Point points[] = {
+        {56, 8, 0},
+        {1, 52, 0},
+        {93, 12, 0},
+        {39, 75, 0}
+    };
 
-int main(){
-    int mode;
+    printf("中心點: (%.1f, %.1f)\n", center_point.x, center_point.y);
+    printf("起始向量: dx=%.1f, dy=%.1f (基準偽角度: %.3f)\n\n", center_vector.x, center_vector.y, start_p_angle);
 
-    while((scanf("%d",&mode) != EOF)){
-        if(mode==-1){
-            printf("Goodbye\n");
-            return 0;
+    // 1. 計算每個點的「相對」偽角度
+    for (int i = 0; i < num_points; i++) {
+        double dx = points[i].x - center_point.x;
+        double dy = points[i].y - center_point.y;
+        
+        // 算出該點的絕對偽角度
+        double p_angle = pseudoangle(dx, dy);
+        
+        // 計算與起始方向的相對差值
+        double rel = p_angle - start_p_angle;
+        
+        // 【核心邏輯】環形校正
+        // 如果 rel > 0，代表該點在起始點的逆時針方向 (也就是順時針的最後面)
+        // 偽角度的完整一圈長度是 4.0，所以減去 4.0 把它推到數列的尾端
+        if (rel > 0) {
+            rel -= 4.0;
         }
-        else if(mode!=1){
-            printf("No such command\n");
-        }
-        else{
-            printf("Use member function\n");
-            main_block();
-        }
-    }
-}
-
-
-void main_block(){
-    int manage_mode;
-
-    while(scanf("%d", &manage_mode) != EOF){
-
-        if(manage_mode < 1 || manage_mode > 5){
-            printf("Exit member function\n");
-            return;
-        }
-
-        else{
-            switch (manage_mode){
-            case 1:
-                add_member();
-                break;
-            case 2:
-                edit_member();
-                break;
-            case 3:
-                del_member();
-                break;
-            case 4:
-                require_one_member();
-                break;
-            case 5:
-                require_all_member();
-                break;
-            }
-        }
-    }
-    return;
-}
-
-void print_id(int id){
-    printf("%d %s %s %s\n", id, member[id].name, member[id].phone, member[id].address);
-}
-
-void add_member(){
-    int id;
-    scanf("%d", &id);
-    char name[name_size+1], phone[phone_size+1], address[address_size+1];
-    scanf("%10s %10s %50s", name, phone, address);
-
-    if(user_check[id]==1){
-        printf("ID duplicated\n");
-        return;
+        
+        // 儲存結果 (最終數值會落在 [-4, 0] 之間)
+        points[i].rel_angle = rel;
     }
 
-    strcpy(member[id].name, name);
-    strcpy(member[id].phone, phone);
-    strcpy(member[id].address, address);
-    user_check[id] = 1;
-    printf("Creation successful\n");
+    // 2. 進行排序
+    qsort(points, num_points, sizeof(Point), compare_clockwise);
 
-    // printf("id=%d user_check=%d member[id].name=%10s member[id].phone=%10s member[id].address=%50s",
-    // id, user_check[id], member[id].name, member[id].phone, member[id].address);
-
-    return;
-}
-
-void edit_member(){
-    int id;
-    int picking_mode;
-    char nwe_data[50+1] = "";
-    scanf("%d %d %50s", &id, &picking_mode, nwe_data);
-
-    if(user_check[id] == 0){
-        printf("No such ID\n");
-        return;
+    // 3. 印出結果
+    printf("--- 從自訂方向開始，順時針排序後 ---\n");
+    for (int i = 0; i < num_points; i++) {
+        printf("順位 %d -> 座標: (%5.1f, %5.1f) | 相對角度值: %6.3f\n", 
+               i+1, points[i].x, points[i].y, points[i].rel_angle);
     }
 
-    switch(picking_mode){
-        case 1:
-            strcpy(member[id].name, nwe_data);
-            break;
-        case 2:
-            strcpy(member[id].phone, nwe_data);
-            break;
-        case 3:
-            strcpy(member[id].address, nwe_data);
-            break;
-    }
-    print_id(id);
-
-    return;
-}
-
-void del_member(){
-    int id;
-    scanf("%d", &id);
-
-    if(user_check[id] == 0){
-        printf("No such ID\n");
-        return;
-    }
-
-    user_check[id]=0;
-    printf("Deletion successful\n");
-
-    return;
-}
-
-void require_one_member(){
-    int id;
-    scanf("%d", &id);
-
-    if(user_check[id] == 0){
-        printf("No such ID\n");
-        return;
-    }
-
-    print_id(id);
-
-    return;
-}
-
-void require_all_member(){
-    for (int i = 0; i <= member_size; i++){
-        if(user_check[i]==1){
-            print_id(i);
-        }
-    }
-    return;
+    return 0;
 }
