@@ -107,8 +107,10 @@ int main() {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if(serial[j] == points[i].rel_angle)
-                    printf("%d ",j);
+                    printf("%d",j);
             }
+            if(i != n-1)
+                printf(" ");
             // printf("points = %f ",points[i].rel_angle);
             // printf("serial = %f ",serial[i]);
         }
