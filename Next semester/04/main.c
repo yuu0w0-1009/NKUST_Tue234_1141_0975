@@ -47,7 +47,6 @@ int main() {
     int first = 0;
 
     while((scanf("%d", &n) != EOF)){
-
         if(n == -1)
             return 1;
 
