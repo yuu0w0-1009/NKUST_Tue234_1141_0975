@@ -7,9 +7,11 @@
 
 // 定義座標點結構
 typedef struct {
+    int id;           // 敵軍編號
     double x;
     double y;
-    double rel_angle; 
+    double rel_angle; // 偽角度
+    double distance;  // 與戰車的距離平方
 } Point;
 
 // 偽角度演算法
@@ -24,13 +26,19 @@ double pseudoangle(double dx, double dy) {
     }
 }
 
-// 降冪排序函數 (確保順時針)
+// 降冪排序函數
 int compare_clockwise(const void *a, const void *b) {
     Point *p1 = (Point *)a;
     Point *p2 = (Point *)b;
     
+    // 先比角度
     if (p1->rel_angle > p2->rel_angle) return -1;
     if (p1->rel_angle < p2->rel_angle) return 1;
+    
+    // 角度相同時 比距離
+    if (p1->distance < p2->distance) return -1;
+    if (p1->distance > p2->distance) return 1;
+    
     return 0;
 }
 
@@ -82,7 +90,6 @@ int main() {
         }
         
         // n行讀資料
-        double *serial = (double*) malloc(n * sizeof(int));
         for (int i = 0; i < n; i++) {
             scanf("%lf %lf", &points[i].x, &points[i].y);
             
@@ -98,24 +105,20 @@ int main() {
                 rel -= 4.0;
             }
             points[i].rel_angle = rel;
-            serial[i] = rel;
+            points[i].id = i;
         }
 
         // 進行排序
         qsort(points, n, sizeof(Point), compare_clockwise);
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if(serial[j] == points[i].rel_angle)
-                    printf("%d",j);
-            }
-            if(i != n-1)
+            printf("%d", points[i].id);
+            if (i != n - 1) {
                 printf(" ");
-            // printf("points = %f ",points[i].rel_angle);
-            // printf("serial = %f ",serial[i]);
+            }
         }
 
-        puts("");
+        printf("\n");
 
         // 釋放記憶體
         free(points);
