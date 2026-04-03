@@ -90,7 +90,6 @@ int main() {
         }
         
         // n行讀資料
-        double *serial = (double*) malloc(n * sizeof(int));
         for (int i = 0; i < n; i++) {
             scanf("%lf %lf", &points[i].x, &points[i].y);
             
@@ -106,19 +105,20 @@ int main() {
                 rel -= 4.0;
             }
             points[i].rel_angle = rel;
-            serial[i] = rel;
+            points[i].id = i;
         }
 
         // 進行排序
         qsort(points, n, sizeof(Point), compare_clockwise);
 
         for (int i = 0; i < n; i++) {
-            printf("%d ", points[i].id);
-            // printf("points = %f ",points[i].rel_angle);
-            // printf("serial = %f ",serial[i]);
+            printf("%d", points[i].id);
+            if (i != n - 1) {
+                printf(" ");
+            }
         }
 
-        puts("");
+        printf("\n");
 
         // 釋放記憶體
         free(points);
