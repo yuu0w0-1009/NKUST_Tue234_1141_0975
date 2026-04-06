@@ -48,7 +48,7 @@ int main() {
 
     while((scanf("%d", &n) != EOF)){
         if(n == -1)
-            return 1;
+            return 0;
 
         Point center;
         Point last;
@@ -95,6 +95,8 @@ int main() {
             // 讀取後直接計算相對偏移量
             double dx = points[i].x - center.x;
             double dy = points[i].y - center.y;
+
+            points[i].distance = dx * dx + dy * dy;
             
             double p_angle = pseudoangle(dx, dy);
             double rel = p_angle - start_p_angle;
