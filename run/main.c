@@ -45,16 +45,14 @@ int compare_clockwise(const void *a, const void *b) {
 int main() {
     int n;
     int first = 0;
+    Point center;
+    Point last;
+    double center_dx, center_dy;
 
     while((scanf("%d", &n) != EOF)){
-
         if(n == -1)
-            return 1;
+            return 0;
 
-        Point center;
-        Point last;
-        double center_dx, center_dy;
-        
         // 首次啟動方向向北(0,1)
         if(first==0){
             last.x = 0;
@@ -96,6 +94,8 @@ int main() {
             // 讀取後直接計算相對偏移量
             double dx = points[i].x - center.x;
             double dy = points[i].y - center.y;
+
+            points[i].distance = dx * dx + dy * dy;
             
             double p_angle = pseudoangle(dx, dy);
             double rel = p_angle - start_p_angle;
