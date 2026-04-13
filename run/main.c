@@ -32,8 +32,8 @@ int compare_clockwise(const void *a, const void *b) {
     Point *p2 = (Point *)b;
     
     // 先比角度
-    if (p1->rel_angle > p2->rel_angle) return -1;
-    if (p1->rel_angle < p2->rel_angle) return 1;
+    if (p1->rel_angle > p2->rel_angle > 1e-9) return -1;
+    if (p1->rel_angle < p2->rel_angle > 1e-9) return 1;
     
     // 角度相同時 比距離
     if (p1->distance < p2->distance) return -1;
@@ -49,7 +49,7 @@ int main() {
     Point last;
     double center_dx, center_dy;
 
-    while((scanf("%d", &n) != EOF)){
+    while((scanf("%d", &n) == 1)){
         if(n == -1)
             return 0;
 
@@ -73,9 +73,15 @@ int main() {
         
         // 不是第一次:計算方向向量
         if(first==0)first = 1;
-        else{
-            center_dx = center.x - last.x;
-            center_dy = center.y - last.y;
+        else {
+            double temp_dx = center.x - last.x;
+            double temp_dy = center.y - last.y;
+            
+            //避免原地停留
+            if (temp_dx != 0.0 || temp_dy != 0.0) {
+                center_dx = temp_dx;
+                center_dy = temp_dy;
+            }
         }
 
         // 計算起始方向偽角度
@@ -101,7 +107,7 @@ int main() {
             double rel = p_angle - start_p_angle;
             
             // 環形校正
-            if (rel > 0) {
+            if (rel > 1e-9) {
                 rel -= 4.0;
             }
             points[i].rel_angle = rel;
