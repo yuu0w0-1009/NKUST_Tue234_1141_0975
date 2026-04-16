@@ -14,9 +14,8 @@ int main(){
     // printf("%c\n",ASCII);
 
     while ( (scanf("%d %d",&O,&N) != EOF)) {
-        if((N < 0) || (O < 0) || (O > 26))
+        if((N <= 0) || (O < 1) || (O > 26))
             break;
-
         // printf("O=%d N=%d\n",O,N);
 
         int size = 2 * N - 1;
@@ -26,12 +25,11 @@ int main(){
                 // printf("%d",abs(j - N + 1));
                 // printf("%d",abs(i - N + 1));
                 int num = max_val(abs(i - N + 1),abs(j - N + 1));
-                printf("%c",ASCII + num%O);
+                printf("%c",ASCII + num % O);
             }
             printf("\n");
         }
     }
     
-    system("pause");
     return 0;
 }
