@@ -1,0 +1,21 @@
+Current string=Please write the equation for 1 minus 44.
+Current string=Please write the equation for 1 minus 44. It is 1 - 44 = -43
+Current string=Please write the equation for 1 minus 44. It is 1 - 44 = -43 It should sound like "Mount Fuji"
+Total number of characters=94
+Number of English letters=60
+Number of tokens=21
+Number of words=14
+Number of keywords=2
+Longest word=equation
+Current string=Please write the equation for 1 minus 44. It is 1 - 44 = -43 It should sound like "Mount FUJI"
+Current string=Please write the equation for 1 minus 44.  is 1 - 44 = -43  should sound like "Mount FUJI"
++1
++44
++1
++44
+-43
+Total number of characters=90
+Number of English letters=56
+Number of tokens=19
+Number of words=12
+Number of keywords=0
