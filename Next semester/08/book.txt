@@ -1,0 +1,4 @@
+const char* BookId[20]={"B01","B02","B03","B04","B05","B06","B07","B08","B09","B10",
+			"B001","B002","B003","B004","B005","B006","B007","B008","B009","B010"};
+const char* BookName[20]={"CPrimer","VerilogX","LogicLab","FPGAPro","BitFlow","CircuitX","DataBus","RegMap","SignalIQ","WaveCore",
+			  "CMOSArt","SyncEdge","ByteCode","StackMem","AXIWorld","BusLogic","ICDesign","NetClock","EmbedSys","WireLink"};

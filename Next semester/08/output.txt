@@ -1,0 +1,179 @@
+Use member function
+Creation successful
+Creation successful
+Creation successful
+ID duplicated
+Creation successful
+2 Mallory 023456789 kaohsiung85F
+No such ID
+2 Victor 023456789 kaohsiung85F
+2 Victor 023456789 AddressVictor
+2 Victor 091111111 AddressVictor
+1 Alice 0912345678 Taipei101
+No such ID
+3 Eve 071234567 kaohsiung
+No such ID
+1 Alice 0912345678 Taipei101
+2 Victor 091111111 AddressVictor
+3 Eve 071234567 kaohsiung
+10 Bob 0987654321 NKUST415
+No such ID
+Deletion successful
+1 Alice 0912345678 Taipei101
+3 Eve 071234567 kaohsiung
+10 Bob 0987654321 NKUST415
+Exit member function
+No such command
+Use member function
+Creation successful
+1 Alice 0912345678 Taipei101
+3 Eve 071234567 kaohsiung
+10 Bob 0987654321 NKUST415
+50 Mr.Victor 0800 Japan
+Exit member function
+Use borrow function
+B01 is borrowed by 1_Alice
+No such book ID
+No such book ID
+No such member ID
+Not returned yet,B01 is borrowed by 1_Alice
+B02 is borrowed by 50_Mr.Victor
+B001 is borrowed by 1_Alice
+No such member ID
+B010 is borrowed by 3_Eve
+B09 is borrowed by 3_Eve
+Not returned yet,B09 is borrowed by 3_Eve
+B04 is borrowed by 3_Eve
+B004 is borrowed by 3_Eve
+B005 is borrowed by 3_Eve
+B01 CPrimer (1_Alice)
+B02 VerilogX (50_Mr.Victor)
+B03 LogicLab
+B04 FPGAPro (3_Eve)
+B05 BitFlow
+B06 CircuitX
+B07 DataBus
+B08 RegMap
+B09 SignalIQ (3_Eve)
+B10 WaveCore
+B001 CMOSArt (1_Alice)
+B002 SyncEdge
+B003 ByteCode
+B004 StackMem (3_Eve)
+B005 AXIWorld (3_Eve)
+B006 BusLogic
+B007 ICDesign
+B008 NetClock
+B009 EmbedSys
+B010 WireLink (3_Eve)
+B01 is returned by 1_Alice
+No such transaction
+No such book ID
+B09 is returned by 3_Eve
+No such transaction
+No such transaction
+B01 CPrimer
+B02 VerilogX (50_Mr.Victor)
+B03 LogicLab
+B04 FPGAPro (3_Eve)
+B05 BitFlow
+B06 CircuitX
+B07 DataBus
+B08 RegMap
+B09 SignalIQ
+B10 WaveCore
+B001 CMOSArt (1_Alice)
+B002 SyncEdge
+B003 ByteCode
+B004 StackMem (3_Eve)
+B005 AXIWorld (3_Eve)
+B006 BusLogic
+B007 ICDesign
+B008 NetClock
+B009 EmbedSys
+B010 WireLink (3_Eve)
+1 Alice
+B001 CMOSArt
+No such member ID
+3 Eve
+B04 FPGAPro
+B004 StackMem
+B005 AXIWorld
+B010 WireLink
+10 Bob
+None
+50 Mr.Victor
+B02 VerilogX
+B01 CPrimer
+B02 VerilogX (50_Mr.Victor)
+B03 LogicLab
+B04 FPGAPro (3_Eve)
+B05 BitFlow
+B06 CircuitX
+B07 DataBus
+B08 RegMap
+B09 SignalIQ
+B10 WaveCore
+B001 CMOSArt (1_Alice)
+B002 SyncEdge
+B003 ByteCode
+B004 StackMem (3_Eve)
+B005 AXIWorld (3_Eve)
+B006 BusLogic
+B007 ICDesign
+B008 NetClock
+B009 EmbedSys
+B010 WireLink (3_Eve)
+B01 CPrimer
+No such book ID
+B02 VerilogX (50_Mr.Victor)
+B010 WireLink (3_Eve)
+B01 CPrimer
+B02 VerilogX (50_Mr.Victor)
+B03 LogicLab
+B04 FPGAPro (3_Eve)
+B05 BitFlow
+B06 CircuitX
+B07 DataBus
+B08 RegMap
+B09 SignalIQ
+B10 WaveCore
+B001 CMOSArt (1_Alice)
+B002 SyncEdge
+B003 ByteCode
+B004 StackMem (3_Eve)
+B005 AXIWorld (3_Eve)
+B006 BusLogic
+B007 ICDesign
+B008 NetClock
+B009 EmbedSys
+B010 WireLink (3_Eve)
+Exit borrow function
+Use member function
+Creation successful
+Exit member function
+Use borrow function
+Not returned yet,B010 is borrowed by 3_Eve
+B008 is borrowed by 66_Boy
+B01 CPrimer
+B02 VerilogX (50_Mr.Victor)
+B03 LogicLab
+B04 FPGAPro (3_Eve)
+B05 BitFlow
+B06 CircuitX
+B07 DataBus
+B08 RegMap
+B09 SignalIQ
+B10 WaveCore
+B001 CMOSArt (1_Alice)
+B002 SyncEdge
+B003 ByteCode
+B004 StackMem (3_Eve)
+B005 AXIWorld (3_Eve)
+B006 BusLogic
+B007 ICDesign
+B008 NetClock (66_Boy)
+B009 EmbedSys
+B010 WireLink (3_Eve)
+Exit borrow function
+Goodbye
