@@ -2,70 +2,55 @@
 
 int main() {
     int cards[7];
-    
-    // 程式需持續讀取直到檔案結尾(EOF)為止 [cite: 11]
-    // 每一行包含7個整數，代表7張牌的編號 [cite: 9, 10]
+
     while (scanf("%d %d %d %d %d %d %d", 
-                 &cards[0], &cards[1], &cards[2], &cards[3], 
-                 &cards[4], &cards[5], &cards[6]) == 7) {
+                &cards[0], &cards[1], &cards[2], &cards[3], 
+                &cards[4], &cards[5], &cards[6]) == 7) {
         
-        // 記錄點數出現次數：大小為14的陣列 (0~12對應A~K，13作為A在最大順子中的高牌位置)
         int ranks[14] = {0}; 
-        // 記錄花色出現次數：大小為4的陣列 [cite: 15]
         int suits[4] = {0};  
-        // 記錄特定花色的特定點數是否存在 (用於判斷同花順)
         int suit_rank[4][14] = {0};
 
-        // 解析 7 張牌
         for (int i = 0; i < 7; i++) {
             int k = cards[i];
-            int s = k / 13;   // 花色(Suit)轉換 [cite: 15]
-            int r = k % 13;   // 點數(Face)轉換 [cite: 16]
+            int s = k / 13;
+            int r = k % 13;
 
             suits[s]++;
             ranks[r]++;
             suit_rank[s][r] = 1;
 
-            // 針對 Ace (0) 賦予雙重身份：不僅是索引0(最小)，也是索引13(最大) [cite: 55, 56, 57]
             if (r == 0) { 
                 ranks[13]++;
                 suit_rank[s][13] = 1;
             }
         }
 
-        // 1. 判斷同花順 (Straight Flush) [cite: 45]
         int is_straight_flush = 0;
         for (int s = 0; s < 4; s++) {
-            if (suits[s] >= 5) { // 只有花色超過5張才有可能
+            if (suits[s] >= 5) {
                 int streak = 0;
                 for (int r = 0; r <= 13; r++) {
                     if (suit_rank[s][r]) streak++;
-                    else streak = 0; // 只要中斷就歸零，確保不會跨越 K 與 2 
+                    else streak = 0;
                     if (streak >= 5) is_straight_flush = 1;
                 }
             }
         }
 
-        // 統計各種對子、三條、鐵支的數量
         int fours = 0, threes = 0, pairs = 0;
-        for (int r = 0; r < 13; r++) { // 這裡只巡迴 0~12，避免將 Ace 重複計算兩次
+        for (int r = 0; r < 13; r++) {
             if (ranks[r] == 4) fours++;
             else if (ranks[r] == 3) threes++;
             else if (ranks[r] == 2) pairs++;
         }
 
-        // 2. 判斷鐵支 (Four of a Kind) [cite: 46]
         int is_four = (fours > 0);
 
-        // 3. 判斷葫蘆 (Full House) [cite: 47]
-        // 包含特殊規則：若同時包含「三條」與「兩對」，應視為 Full House 
-        // 或者是兩組「三條」也能組成葫蘆
         int is_full_house = ((threes >= 1 && pairs >= 1) || (threes >= 2));
 
-        // 4. 判斷同花 (Flush) [cite: 48]
         int is_flush = (suits[0] >= 5 || suits[1] >= 5 || suits[2] >= 5 || suits[3] >= 5);
 
-        // 5. 判斷順子 (Straight) [cite: 49]
         int is_straight = 0;
         int streak = 0;
         for (int r = 0; r <= 13; r++) {
@@ -74,12 +59,10 @@ int main() {
             if (streak >= 5) is_straight = 1;
         }
 
-        // 6~8. 判斷三條、兩對、一對 [cite: 50, 51, 52]
         int is_three = (threes > 0);
         int is_two_pair = (pairs >= 2);
         int is_one_pair = (pairs == 1);
 
-        // 依等級由大到小輸出牌型名稱 [cite: 44, 53]
         if (is_straight_flush) printf("Straight Flush\n");
         else if (is_four) printf("Four of a Kind\n");
         else if (is_full_house) printf("Full House\n");
